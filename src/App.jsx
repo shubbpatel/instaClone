@@ -5,36 +5,35 @@ import logo from './image/instagram.png';
 import bike from './image/bike.png';
 import { db, app } from "./firebase";
 import {collection, getDocs, query, doc, setDoc, onSnapshot} from 'firebase/firestore';
-import {async} from "./Async";
 
 
 
 
 function App() {
 
-    // const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([]);
     // const db = getDatabase();
     // const dbpost = ref(db, 'posts/');
 
     
    
-    // useEffect(() => {
+    useEffect(() => {
 
-    //   // const q = query(collection(db, 'posts'));
-    //   //   onSnapshot(q, (querySnapshot) => {
+      const q = query(collection(db, 'posts'));
+        onSnapshot(q, (querySnapshot) => {
        
-    //   // //  console.log('posts');
+      //  console.log('posts');
        
-    //   //     const posts = []
-    //   //     // setPosts(snapshot.docs.map(doc => doc.data()))
+          const posts = []
+          // setPosts(snapshot.docs.map(doc => doc.data()))
 
-    //   //     querySnapshot.forEach((doc) => {
-    //   //       posts.push({ id: doc.id, data: doc.data() })
-    //   //     })
+          querySnapshot.forEach((doc) => {
+            posts.push({ id: doc.id, data: doc.data() })
+          })
     
-    //   //     setPosts(posts)
-    //     // })
-    //   }, []);
+          setPosts(posts)
+        })
+      }, []);
 
 
 
@@ -49,10 +48,8 @@ function App() {
             <button className="sButton">Search</button>
             </div>
         </div>
-        <Async/>
-
-        {posts.map(post => (
-            <Post key={post.key} username={post.username} caption={post.caption} imageURL={post.imageUrl} />
+{posts.map(post => (
+            <Post username={post.username} caption={post.caption} imageURL={post.imageUrl} />
         )) 
         }
         <Post username="shubham" caption="React is too much fun" imageUrl="./image/bike" />

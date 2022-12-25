@@ -1,5 +1,5 @@
 import React from 'react';
-import Postcss from './Post.css';
+import Postcss from "./Post.css";
 import imageUrl from './image/insta.jpg';
 import logoimage from './image/shubham.jpg';
 import { Avatar } from '@mui/material';

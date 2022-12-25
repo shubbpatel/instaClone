@@ -40,6 +40,10 @@ border-radius:3px;
     color: darkgrey;
     border: 1px solid darkgrey;
     border-radius:3px;
+    
+}
+.sButton:hover{
+    cursor: pointer;
 }
 
 
