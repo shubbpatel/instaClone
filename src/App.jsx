@@ -52,7 +52,7 @@ function App() {
             <Post username={post.username} caption={post.caption} imageURL={post.imageUrl} />
         )) 
         }
-        <Post username="shubham" caption="React is too much fun" imageUrl="./image/bike" />
+        <Post username="shubbpatel" caption="React is too much fun" imageUrl="./image/bike" />
         <Post username="ReactApp" caption="React is too much fun" imageUrl="./image/instagram.png" />
         <Post username="Instagram" caption="React is too much fun" imageUrl="./image/instagram.png" />
     
