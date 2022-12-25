@@ -1,0 +1,19 @@
+import { initializeApp } from "firebase/app";
+
+
+
+const firebaseApp = firebase.initializeApp({
+    apiKey: "AIzaSyA_JcCnpNIK1GLSmhDJtO4cwYL50x2MeVc",
+    authDomain: "instagram-clone-b2697.firebaseapp.com",
+    projectId: "instagram-clone-b2697",
+    storageBucket: "instagram-clone-b2697.appspot.com",
+    messagingSenderId: "817047666662",
+    appId: "1:817047666662:web:5efa2ef0bba771f64c6027"
+
+});
+
+const db = firebaseApp.firestore();
+const auth = firebaseApp.auth();
+const storage = firebaseApp.storage();
+
+export { db, auth, storage };
