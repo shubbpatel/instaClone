@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import {collection, getDocs, } from 'firebase/firestore/lite';
 import {getFirestore} from "firebase/firestore";
+import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
+
+
 // import { auth } from "firebase/auth";
 // import { provider } from 'firebase/auth';
 // Follow this pattern to import other Firebase services
@@ -18,6 +22,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const database = getDatabase(app);
+const storage = getStorage(app);
+
 // const storage = getFirestore();
 // const auth = getAuth(app);
 // const provider = new googleAuthProvider(app)
@@ -30,4 +37,4 @@ const db = getFirestore(app);
 //     return cityList;
 // }
 
-export { db, app };
+export { db, app, database, storage };

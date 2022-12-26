@@ -4,7 +4,9 @@ import imageUrl from './image/insta.jpg';
 import logoimage from './image/shubham.jpg';
 import { Avatar } from '@mui/material';
 
-function Post({username, caption, imageURL, key}) {
+function Post({username, caption, imageURL}) {
+ // console.log("shubham ganda")
+  //console.log(username)
   return (<div className='post'>
     <div className="postHeader">
     <Avatar
@@ -12,7 +14,7 @@ function Post({username, caption, imageURL, key}) {
        alt='S'
        src={logoimage}
       />
-      <p>{key}</p>
+      {/* <p>{key}</p> */}
       <h3>{username}</h3>
     </div>
       <div className='postImagediv'>

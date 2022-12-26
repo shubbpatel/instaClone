@@ -40,10 +40,19 @@ border-radius:3px;
     color: darkgrey;
     border: 1px solid darkgrey;
     border-radius:3px;
+    margin-right: 50px;
     
 }
 .sButton:hover{
     cursor: pointer;
+}
+
+.appSignUp_img{
+width: 40px;
+}
+.signUpForm{
+   display: flex;
+   flex-direction: column; 
 }
 
 
