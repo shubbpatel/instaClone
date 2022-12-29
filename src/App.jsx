@@ -103,7 +103,7 @@ createUserWithEmailAndPassword(auth, email, password)
     const errorMessage = error.message;
     // ..
   });
-  setOpen(false)
+  // setOpen(false)
     
   };
 const signIn = (event) =>{
@@ -121,7 +121,16 @@ const signIn = (event) =>{
 
   return (
     <div className="app">
-      <ImageUpload/>
+
+
+{/* <ImageUpload username={user.displayName} /> */}
+
+        {user?.displayName?(
+          
+          <ImageUpload username={user.displayName}/>
+          ):(
+            <h3>Log in First</h3>
+        )}
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
@@ -209,24 +218,25 @@ const signIn = (event) =>{
           key={post.id}
           username={post.username}
           caption={post.caption}
-          imageURL={post.imageUrl}
+          imageURL={post.imageURL}
         />
       ))}
       <Post
         username="shubbpatel"
         caption="React is too much fun"
-        imageUrl="./image/bike"
-      />
-      {/* <Post
-        username="ReactApp"
-        caption="React is too much fun"
-        imageUrl="./image/instagram.png"
+        imageURL={bike}
       />
       <Post
-        username="Instagram"
+        username="shubbpatel"
         caption="React is too much fun"
-        imageUrl="./image/instagram.png"
-      /> */}
+        imageURL={bike}
+      />
+      <Post
+        username="shubbpatel"
+        caption="React is too much fun"
+        imageURL={bike}
+      />
+    
     </div>
   );
 }

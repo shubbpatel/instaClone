@@ -1,6 +1,6 @@
 import React from 'react';
 import Postcss from "./Post.css";
-import imageUrl from './image/insta.jpg';
+import imageURL from './image/insta.jpg';
 import logoimage from './image/shubham.jpg';
 import { Avatar } from '@mui/material';
 
@@ -18,7 +18,7 @@ function Post({username, caption, imageURL}) {
       <h3>{username}</h3>
     </div>
       <div className='postImagediv'>
-        <img className='postImage' src={imageUrl} alt="img" /></div>
+        <img className='postImage' src={imageURL} alt="img" /></div>
         {/* image */}
 
         <h4 className='postText'><strong>{username}</strong> {caption}</h4>
