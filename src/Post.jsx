@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Postcss from "./Post.css";
 import imageURL from './image/insta.jpg';
 import logoimage from './image/shubham.jpg';
 import { Avatar } from '@mui/material';
+import { doc, onSnapshot, collection, query, where } from "firebase/firestore";
+import {db} from "./firebase"
 
-function Post({username, caption, imageURL}) {
- // console.log("shubham ganda")
-  //console.log(username)
+
+function Post({username, caption, imageURL, postId}) {
+
+const [comment, setComment] = useState([]);
+
+// useEffect(()=>{
+//   let unsubscribe;
+//   if(postId){
+//     unsubscribe = collection(db, "posts")
+//     .doc(postId)
+//     .collection('comments')
+//     .onSnapshot((querySnapshot)=> {
+//       setComment(querySnapshot.docs.map((doc) => doc.data()))
+//     })
+//   }
+
+//   // return () => {
+//   //   unsubscribe();
+//   // }
+// }, [postId])
+
+ 
   return (<div className='post'>
     <div className="postHeader">
     <Avatar
@@ -22,7 +43,10 @@ function Post({username, caption, imageURL}) {
         {/* image */}
 
         <h4 className='postText'><strong>{username}</strong> {caption}</h4>
-        {/* username + caption */}
+        <form action="">
+<input className='comment'  type="text" onChange={event =>  setComment(event.target.value)}  value={comment} />
+
+        </form>
     </div>
   )
 }

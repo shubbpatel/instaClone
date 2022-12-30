@@ -28,3 +28,8 @@
 .post_Avatar {
     margin: 10px;
 }
+
+.comment{
+    width: 100%;
+    object-fit: contain;
+}

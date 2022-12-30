@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import "./imageupload.css";
 import Post from "./Post";
 import logo from "./image/instagram.png";
 import bike from "./image/bike.png";
@@ -11,6 +12,7 @@ import {
   doc,
   setDoc,
   onSnapshot,
+  orderBy
 } from "firebase/firestore";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -40,7 +42,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const handleOpen = () => setOpen(true);
 
   useEffect(()=>{
@@ -69,7 +71,7 @@ function App() {
   useEffect(() => {
 
     
-    const q = query(collection(db, "posts"));
+    const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
     onSnapshot(q, (querySnapshot) => {
       //  console.log('posts');
 
@@ -103,13 +105,21 @@ createUserWithEmailAndPassword(auth, email, password)
     const errorMessage = error.message;
     // ..
   });
-  // setOpen(false)
-    
-  };
+  setOpen(false)
+};
+
 const signIn = (event) =>{
   event.preventDefault();
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
+  .then((authUser) => {
+    // Signed in
+    return authUser.user.updateProfile({
+      displayName: username
+    }) 
+    // const user = userCredential.user;
+    // ...
+  })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -125,14 +135,7 @@ const signIn = (event) =>{
 
 {/* <ImageUpload username={user.displayName} /> */}
 
-        {user?.displayName?(
-          
-          <ImageUpload username={user.displayName}/>
-          ):(
-            <h3>Log in First</h3>
-        )}
-
-      <Modal open={open} onClose={() => setOpen(false)}>
+     <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
           <form action="" className="signUpForm">
           <center>
@@ -203,7 +206,7 @@ const signIn = (event) =>{
           <input type="text" className="inputbox" />
           <button className="sButton" >Search</button>
         </div>
-          {user ?(
+          {user?(
            <Button onClick={() => getAuth().signOut()}>Log Out</Button>
            ):
            <div>
@@ -213,9 +216,10 @@ const signIn = (event) =>{
            }
 
       </div>
-      {posts.map((post) => (
+      {posts.map((post, id) => (
         <Post
           key={post.id}
+          postId={id}
           username={post.username}
           caption={post.caption}
           imageURL={post.imageURL}
@@ -236,6 +240,12 @@ const signIn = (event) =>{
         caption="React is too much fun"
         imageURL={bike}
       />
+
+{user?(
+          <ImageUpload  username={user.displayName}/>
+          ):(
+            <h3>Log in First</h3>
+        )}
     
     </div>
   );

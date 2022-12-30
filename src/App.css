@@ -14,12 +14,14 @@
     margin-bottom: 25px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .appHeader_img {
     width: 40px;
     padding: 10px;
     margin-left:29%;
+    object-fit: contain;
 }
 
 .searchbox{

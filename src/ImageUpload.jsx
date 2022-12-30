@@ -4,7 +4,8 @@ import {db, storage} from "./firebase"
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { upload } from '@testing-library/user-event/dist/upload';
 // import { firebase } from './firebase';
-import { collection,serverTimestamp, addDoc } from 'firebase/firestore';
+import { collection,serverTimestamp, addDoc, doc } from 'firebase/firestore';
+import { Modal } from '@mui/material';
 
 
 
@@ -61,9 +62,9 @@ const handleUpload = () =>{
           // User canceled the upload
           break;
   
-        // ...
-  
-        case 'storage/unknown':
+          // ...
+          
+          case 'storage/unknown':
           // Unknown error occurred, inspect error.serverResponse
           break;
       }
@@ -77,7 +78,7 @@ const handleUpload = () =>{
           timestamp: serverTimestamp(),
           caption: caption,
           imageURL: downloadURL,
-          username: username  
+          username: username
         })
 
 
@@ -87,9 +88,9 @@ const handleUpload = () =>{
 };
 
   return (
-    <div>
-        <progress value={progress} max="100" />
-        <input type="text" placeholder='enter Caption' onChange={event => setCaption(event.target)} value={caption} />
+    <div className="imageUpload" >
+        <progress onChange={event => setProgress(event.target.value)} value={progress} max="100" />
+        <input type="text" placeholder='enter Caption' onChange={event => setCaption(event.target.value)} value={caption} />
         <input type="file" name="" id="" onChange={handleChange}/>
         <Button onClick={handleUpload} >Upload</Button>
     </div>
