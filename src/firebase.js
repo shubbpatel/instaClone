@@ -3,6 +3,8 @@ import {collection, getDocs, } from 'firebase/firestore/lite';
 import {getFirestore} from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+
 
 
 // import { auth } from "firebase/auth";
@@ -21,6 +23,7 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 const database = getDatabase(app);
 const storage = getStorage(app);
@@ -37,4 +40,4 @@ const storage = getStorage(app);
 //     return cityList;
 // }
 
-export { db, app, database, storage };
+export { db, app, database, storage, auth };

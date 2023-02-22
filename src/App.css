@@ -1,9 +1,16 @@
 * {
     margin: 0;
+    padding: 0;
 }
 
 .app {
-    background-color: #FAFAFA;
+    background-color: black;
+    /* width: 85%; */
+    /* position: fixed; */
+    /* right: 0; */
+    /* margin-left: 15%; */
+    display: none;
+    margin-top: 10rem;
 }
 
 .appHeader {

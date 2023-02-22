@@ -12,15 +12,18 @@ import {
   doc,
   setDoc,
   onSnapshot,
-  orderBy
+  orderBy,
 } from "firebase/firestore";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "./firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,onAuthStateChanged
+} from "firebase/auth";
 import ImageUpload from "./ImageUpload";
-
 
 const style = {
   position: "absolute",
@@ -34,7 +37,6 @@ const style = {
   p: 4,
 };
 
-
 function App() {
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
@@ -45,32 +47,27 @@ function App() {
   const [user, setUser] = useState("");
   const handleOpen = () => setOpen(true);
 
-  useEffect(()=>{
-    const auth = getAuth();
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user logged in
+        console.log(authUser);
+        setUser(authUser);
+      } else {
+        // user logged out
+        setUser(null);
+      }
 
- const unsubscribe = auth.onAuthStateChanged((authUser) =>{
-  if(authUser){
-    // user logged in
-    console.log(authUser);
-    setUser(authUser);
-
-  }else{
-    // user logged out
-    setUser(null);
-  }
-
-  return () => {
-    unsubscribe();
-  }
-})
-  },[user, username]);
+      return () => {
+        unsubscribe();
+      };
+    });
+  }, [user, username]);
 
   // const db = getDatabase();
   // const dbpost = ref(db, 'posts/');
 
   useEffect(() => {
-
-    
     const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
     onSnapshot(q, (querySnapshot) => {
       //  console.log('posts');
@@ -79,10 +76,15 @@ function App() {
       // setPosts(snapshot.docs.map(doc => doc.data()))
       // console.log(querySnapshot)
       querySnapshot.forEach((doc) => {
-       // console.log(doc.data())
-        posts.push({ id: doc.id, username: doc.data().username, imageURL: doc.data().imageURL, caption: doc.data().caption });
+        // console.log(doc.data())
+        posts.push({
+          id: doc.id,
+          username: doc.data().username,
+          imageURL: doc.data().imageURL,
+          caption: doc.data().caption,
+        });
       });
-   console.log(posts)
+      console.log(posts);
       setPosts(posts);
     });
   }, []);
@@ -90,56 +92,58 @@ function App() {
   const signUp = (event) => {
     event.preventDefault();
 
-    const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((authUser) => {
-    // Signed in
-    return authUser.user.updateProfile({
-      displayName: username
-    }) 
-    // const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-  setOpen(false)
-};
+    createUserWithEmailAndPassword(auth, email, password)
+      // .then((authUser) => {
+      //   // Signed in
+      //   return authUser.user.updateProfile({
+      //     displayName: username,
+      //   });
+      //   // const user = userCredential.user;
+      //   // ...
+      // })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    setOpen(false);
+  };
 
-const signIn = (event) =>{
-  event.preventDefault();
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, email, password)
-  .then((authUser) => {
-    // Signed in
-    return authUser.user.updateProfile({
-      displayName: username
-    }) 
-    // const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-  setOpenSignIn(false)
-}
+  const signIn = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      // .then((authUser) => {
+      //   // Signed in
+      //   return authUser.user.updateProfile({
+      //     displayName: username,
+      //   });
+      //   // const user = userCredential.user;
+      //   // ...
+      // })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    setOpenSignIn(false);
+  };
+
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   if (currentUser) {displayName: username};
+    
+  // });
+
 
 
   return (
     <div className="app">
+      {/* <ImageUpload username={user.displayName} /> */}
 
-
-{/* <ImageUpload username={user.displayName} /> */}
-
-     <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
           <form action="" className="signUpForm">
-          <center>
-            <img className="appSignUp_img" src={logo} alt="" />
+            <center>
+              <img className="appSignUp_img" src={logo} alt="" />
             </center>
             <Input
               type="text"
@@ -159,27 +163,22 @@ const signIn = (event) =>{
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
-            <Button type="submit" onClick={signUp}>Sign UP</Button>
-            </form>
-            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Button type="submit" onClick={signUp}>
+              Sign UP
+            </Button>
+          </form>
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
           </Typography> */}
         </Box>
       </Modal>
 
-
       <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
         <Box sx={style}>
           <form action="" className="signUpForm">
-          <center>
-            <img className="appSignUp_img" src={logo} alt="" />
+            <center>
+              <img className="appSignUp_img" src={logo} alt="" />
             </center>
-            {/* <Input
-              type="text"
-              placeholder="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            ></Input> */}
             <Input
               type="text"
               placeholder="email"
@@ -192,9 +191,11 @@ const signIn = (event) =>{
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
-            <Button type="submit" onClick={signIn}>Sign In</Button>
-            </form>
-            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Button type="submit" onClick={signIn}>
+              Sign In
+            </Button>
+          </form>
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
           </Typography> */}
         </Box>
@@ -204,17 +205,16 @@ const signIn = (event) =>{
         <img className="appHeader_img" src={logo} alt="" />
         <div className="searchbox">
           <input type="text" className="inputbox" />
-          <button className="sButton" >Search</button>
+          <button className="sButton">Search</button>
         </div>
-          {user?(
-           <Button onClick={() => getAuth().signOut()}>Log Out</Button>
-           ):
-           <div>
-           <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-           <Button onClick={() => setOpen(true)}>Sign UP</Button>
-           </div>
-           }
-
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Log Out</Button>
+        ) : (
+          <div>
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign UP</Button>
+          </div>
+        )}
       </div>
       {posts.map((post, id) => (
         <Post
@@ -241,12 +241,11 @@ const signIn = (event) =>{
         imageURL={bike}
       />
 
-{user?(
-          <ImageUpload  username={user.displayName}/>
-          ):(
-            <h3>Log in First</h3>
-        )}
-    
+      {user?(
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Log in First</h3>
+      )}
     </div>
   );
 }
