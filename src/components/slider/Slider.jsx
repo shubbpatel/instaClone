@@ -2,6 +2,7 @@ import React from 'react';
 import style from './slider.css';
 import { avatar, home} from '../export'
 import Posts from '../newpost/Posts';
+import FooterPhone from '../footerphone/FooterPhone';
 
 export default function Slider() {
   return (
@@ -68,7 +69,7 @@ export default function Slider() {
     <div>
     <Posts/>
     </div>
-
+<FooterPhone/>
     </div>
   )
 }

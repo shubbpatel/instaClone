@@ -82,8 +82,15 @@ span{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    background: black;
+    /* background: black; */
+    background: rgb(32, 31, 31);
+
     color: white;
+    border-bottom: 1 px solid grey;
+    border-right:none ;
+    outline: none;
+    margin-right: 0;
+
 
 
     }
@@ -92,6 +99,13 @@ span{
     margin: 1rem 0;
     /* padding: 0; */
     border-top: none;
+  /* background: rgb(65, 64, 64); */
+  /* background: black; */
+  background: rgb(32, 31, 31);
+
+  border-radius: 0px;
+
+
 
 }
 }

@@ -1,5 +1,5 @@
 import home from '../image/home.png';
-import loupe from '../image/loupe.png';
+import search from '../image/search.png';
 import avatar from '../image/shubham.jpg';
 import add from '../image/add.png';
 import bell from '../image/bell.png';
@@ -15,7 +15,7 @@ import option from '../image/option.png';
 
 
 
-export {home, loupe, avatar, add,
+export {home, search, avatar, add,
     bell,
     chat,
     explore,

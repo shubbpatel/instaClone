@@ -1,0 +1,52 @@
+.reels {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+  }
+  
+  .reels-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .reels-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 16px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .reels:hover .reels-overlay {
+    opacity: 1;
+  }
+  
+  .reels-overlay-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  
+  .reels-overlay-stats p {
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  

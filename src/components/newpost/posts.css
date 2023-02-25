@@ -18,7 +18,7 @@
   border-radius: 1rem;
   /* background: rgb(32, 9, 9); */
 
-
+/* display: none; */
 }
 .postsHead{
     display: flex;
@@ -56,6 +56,16 @@
 }
 .lCS{
     gap: .5rem;
+    display: flex;
+    align-items: center;
+}
+.lCS button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.lCS button svg{
+    width: 30px;
 }
 .postsHead img{
     width: 25px;
@@ -76,6 +86,12 @@ cursor: pointer;
         margin-left: 0;
         align-items: center;
         border: none;
+  /* background: rgb(65, 64, 64); */
+  background: rgb(32, 31, 31);
+  border-radius: 0px;
+  border-right:none ;
+  outline: none;
+  margin-right: 0;
 
        
         

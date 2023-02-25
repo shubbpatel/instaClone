@@ -1,19 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
 import Slider from './components/slider/Slider';
 import Footer from './components/footer/Footer';
+import App from '../src/App';
+import Search from './components/search/Search';
+import {BrowserRouter as Router, Link ,Route, Routes} from 'react-router-dom';
+import Login from './components/login/Login';
+import SignUp from './components/signup/Signup';
+import Reels from './components/reels/Reels';
+import Explore from './components/explore/Explore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header/>
-    <App />
-    <Slider/>
-    <Footer/>
+    <Router>
+      <Routes>
+    {/* <Route exact path='/' element={<Header/>} /> */}
+    <Route exact path='/login' element={<Login/>} />
+    <Route exact path='/signup' element={<SignUp/>} />
+    <Route exact path='/reels' element={<Reels/>} />
+    <Route exact path='/explore' element={<Explore/>} />
+    <Route exact path='/' element={<App/>} />
+    <Route exact path='/search' element={<Search/>} />
+
+    </Routes>
+    
+    </Router>
   </React.StrictMode>
 );
 
