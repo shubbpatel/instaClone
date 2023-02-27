@@ -15,6 +15,7 @@ import { Avatar } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./../firebase";
+import Search from "./search/Search";
 
 
 
@@ -24,6 +25,12 @@ export default function Header() {
   function handleMenuClick() {
     setShowMenu(!showMenu);
   }
+  const [showSearch, setShowSearch] = useState(false);
+  function handleSearchClick() {
+    setShowSearch(!showSearch);
+  }
+
+
   const mouseOut = (()=> {
     setShowMenu(false)
   })
@@ -47,16 +54,30 @@ export default function Header() {
           <img src={home} alt="" />
           <a href="/">Home</a>
         </div>
-        <div className="tags flex" >
-          <img src={search} alt="" />
-          <Link to="/search">Search</Link>
+        <div className="SearchBox tags flex"   >
+          <img src={search} alt="" onClick={handleSearchClick} />
+          <Link onClick={handleSearchClick} to="">Search</Link>
+{/* <button onClick={handleSearchClick} style={{background:'none', border:'none', color:'white',fontWeight:'300', fontSize:'16px',}}>Search</button> */}
+          {/* <a href="">Search</a> */}
+          {
+            showSearch && <div className="searchBoxCard slide-fwd-right"
+            
+            >
+              <Search/>
+              {/* <h1 style={{color:'white'}}>Search</h1>
+              <br />       
+              <br />       
+              <input type="text" style={{width:'100%', lineHeight:'25px', borderRadius:'5px', border:'none',}} />
+              <br />
+              <h5 style={{color:'white'}} >Recents</h5> */}
 
-          {/* <a href="/search">Search</a> */}
+            </div>
+          }
         </div>
         <div className="tags flex">
           <img src={explore} alt="" />
           <Link to="/explore">Explore</Link>
-
+          
           {/* <a href="/">Explore</a> */}
         </div>
         <div className="tags flex">

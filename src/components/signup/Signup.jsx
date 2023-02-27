@@ -29,8 +29,8 @@ export default function Signup() {
   const handleSignIn = async () => {
     try {
       // const auth = getAuth();
-      const { email, password } = formValues;
-      await createUserWithEmailAndPassword(auth, email, password);
+      const { username, email, password } = formValues;
+      await createUserWithEmailAndPassword(auth,email, password, username);
       console.log("signed up");
     } catch (err) {
       console.log(err);

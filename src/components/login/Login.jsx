@@ -91,8 +91,6 @@ const Login = () => {
           </Link>
         </p>
         
-        {/* <Link to="/signup"><h5>Don't have an account? Sign up</h5></Link> */}
-        {/* <Footer/> */}
     </div>
     </div>
   );

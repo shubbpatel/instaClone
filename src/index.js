@@ -12,6 +12,7 @@ import Login from './components/login/Login';
 import SignUp from './components/signup/Signup';
 import Reels from './components/reels/Reels';
 import Explore from './components/explore/Explore';
+import ImageUpload from './components/imageupload/Imageupload';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
     <Route exact path='/explore' element={<Explore/>} />
     <Route exact path='/' element={<App/>} />
     <Route exact path='/search' element={<Search/>} />
+    <Route exact path='/upload' element={<ImageUpload/>} />
 
     </Routes>
     

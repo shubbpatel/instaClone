@@ -2,3 +2,12 @@
     z-index: 22;
     right: 0;
 }
+.search{
+    background: black;
+    color: white;
+}
+.slide-right{animation:slide-right .5s cubic-bezier(.25,.46,.45,.94) both}
+
+
+
+ @keyframes slide-right{0%{transform:translateX(0)}100%{transform:translateX(100px)}}
